@@ -6,8 +6,8 @@
     "build": "rollup -c rollup.config.js"
   },
   "main": "bind-group.js",
-  "keywords": [],
-  "author": "",
+  "keywords": ["preact", "forms", "events"],
+  "author": "k1r0s",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.0",
