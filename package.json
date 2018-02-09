@@ -1,0 +1,24 @@
+{
+  "name": "preact-bind-group",
+  "version": "0.0.1",
+  "description": "simple preact grouping onChange events",
+  "scripts": {
+    "build": "rollup -c rollup.config.js"
+  },
+  "main": "bind-group.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-es2015-computed-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "rollup": "^0.50.0",
+    "rollup-plugin-babel": "^3.0.2"
+  },
+  "dependencies": {
+    "preact": "^8.2.6"
+  }
+}
