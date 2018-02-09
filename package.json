@@ -1,12 +1,16 @@
 {
   "name": "preact-bind-group",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "simple preact grouping onChange events",
   "scripts": {
     "build": "rollup -c rollup.config.js"
   },
   "main": "bind-group.js",
-  "keywords": ["preact", "forms", "events"],
+  "keywords": [
+    "preact",
+    "forms",
+    "events"
+  ],
   "author": "k1r0s",
   "license": "ISC",
   "devDependencies": {
