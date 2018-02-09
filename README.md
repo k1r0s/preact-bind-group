@@ -4,7 +4,7 @@
 
 #### What
 
-`<BindGroup />` its a event wrapper for preact (soon react) to centralize and simplify events management and state binding
+`<BindGroup />` its a event wrapper for preact (soon react) to centralize and simplify events management and state binding.
 
 #### Why
 
@@ -16,6 +16,11 @@ If you check the code u will see that is seeking into its children that contain 
 
 BindGroup keeps an internal state to internally track these values.
 
+BindGroup supports any control field that uses `onChange` to deal with changes and it does by default, but additionally you can provide other event reporter with `data-event` as follows:
+
+```javascript
+<input data-bind="value0" data-event="onInput"/>
+```
 
 #### Usage
 
