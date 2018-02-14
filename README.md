@@ -1,7 +1,5 @@
 ## Preact bind-group
 
-# WIP DISCLAIMER :fire:
-
 #### What
 
 `<BindGroup />` its a event wrapper for preact (soon react) to centralize and simplify events management and state binding.
@@ -23,6 +21,7 @@ BindGroup supports any control field that uses `onChange` to deal with changes a
 ```
 
 #### Usage
+
 
 ```javascript
 <div>
@@ -65,3 +64,29 @@ render() {
 This is the signature of the `watch` callback: ({ [key: string]: any }, key: string) => void
 
 If you need to perform any other actions, like validation or something, you can use 2nd argument instead.
+
+#### preload form with data
+
+You should use `preload` attr to fill form fields with default data
+
+```javascript
+<div>
+  <h3>BindGroup demo</h3>
+  <BindGroup watch={change => console.log(change)} preload={userModel}>
+    <div>
+      <input data-bind="name"/>
+    </div>
+    <div>
+      <input data-bind="likesPizza" type="checkbox"/>
+    </div>
+    <div>
+      <input data-bind="belovedFood" type="radio" value="potato"/>
+      <input data-bind="belovedFood" type="radio" value="banana"/>
+      <input data-bind="belovedFood" type="radio" value="peanuts"/>
+    </div>
+    <div>
+      <textarea data-bind="comments"/>
+    </div>
+  </BindGroup>
+</div>
+```
