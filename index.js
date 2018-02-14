@@ -48,7 +48,7 @@ BindGroup.createChangeReport = (child, { target }, setState) => {
   };
 
   setState(state => ({ ...state, ...change }));
-  return [{ [change.name]: change.value }, change.name];
+  return [change, child.attributes[BindGroup.bindAttrName]];
 }
 
 BindGroup.getFormProps = (child, state) => {

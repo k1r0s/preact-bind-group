@@ -84,7 +84,7 @@ BindGroup.createChangeReport = function (child, _ref2, setState) {
   setState(function (state) {
     return _extends({}, state, change);
   });
-  return [_defineProperty({}, change.name, change.value), change.name];
+  return [change, child.attributes[BindGroup.bindAttrName]];
 };
 
 BindGroup.getFormProps = function (child, state) {

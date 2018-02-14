@@ -1,6 +1,6 @@
 {
   "name": "preact-bind-group",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "simple preact grouping onChange events",
   "scripts": {
     "build": "rollup -c rollup.config.js"
