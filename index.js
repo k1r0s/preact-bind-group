@@ -8,6 +8,12 @@ export class BindGroup extends Component {
     }
   }
 
+  componentWillMount() {
+    if(this.props[BindGroup.preloadStateAttrName]) {
+      this.setState(this.props[BindGroup.preloadStateAttrName]);
+    }
+  }
+
   transformChildren(children) {
     return children.map(child => BindGroup.mapChildren(child, this.onPropertyChange.bind(this), this.state, this.setState.bind(this)));
   }
@@ -25,15 +31,23 @@ export class BindGroup extends Component {
 BindGroup.bindAttrName = "data-bind";
 BindGroup.bindAttrEvent = "data-event";
 BindGroup.watchHandlerAttrName = "watch";
+BindGroup.preloadStateAttrName = "preload";
+
+BindGroup.extractValue = target => {
+  if(target.nodeName === "INPUT" && target.getAttribute("type") === "checkbox") {
+    return target.checked;
+  } else {
+    return target.value;
+  }
+}
 
 BindGroup.createChangeReport = (child, { target }, setState) => {
-  // checkbox
-  const change = { name: child.attributes[BindGroup.bindAttrName], value: target.value };
-  if (target.nodeName === "INPUT" && target.getAttribute("type") === "checkbox") {
-    change.value = target.checked;
-  }
 
-  setState(state => ({ ...state, [change.name]: change.value }));
+  const change = {
+    [child.attributes[BindGroup.bindAttrName]]: BindGroup.extractValue(target)
+  };
+
+  setState(state => ({ ...state, ...change }));
   return [{ [change.name]: change.value }, change.name];
 }
 
