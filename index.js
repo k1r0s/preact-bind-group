@@ -1,6 +1,6 @@
 import { h, Component } from "preact";
 
-export default class BindGroup extends Component {
+export class BindGroup extends Component {
 
   onPropertyChange(change, evt) {
     if (this.props instanceof Object && typeof this.props[BindGroup.watchHandlerAttrName] === "function") {
@@ -41,7 +41,7 @@ BindGroup.mapChildren = (child, cbk, state, setState) => {
   if (child.attributes instanceof Object && child.attributes[BindGroup.bindAttrName]) {
     child.attributes = {
       ...child.attributes,
-      [child.attributes[BindGroup.bindAttrEvent] || 'onChange']: evt => cbk.apply(null, [...BindGroup.createChangeReport(child, evt, setState), evt]), 
+      [child.attributes[BindGroup.bindAttrEvent] || 'onChange']: evt => cbk.apply(null, [...BindGroup.createChangeReport(child, evt, setState), evt]),
       name: child.attributes[BindGroup.bindAttrName], value: state[child.attributes[BindGroup.bindAttrName]]
     }
   } else if (child.children instanceof Array && child.children.length) {
