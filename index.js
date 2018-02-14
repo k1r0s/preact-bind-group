@@ -51,12 +51,25 @@ BindGroup.createChangeReport = (child, { target }, setState) => {
   return [{ [change.name]: change.value }, change.name];
 }
 
+BindGroup.getFormProps = (child, state) => {
+  if (child.attributes.type === "checkbox") {
+    return { checked: state[child.attributes[BindGroup.bindAttrName]] }
+  }
+
+  if (child.attributes.type === "radio") {
+    return { checked: state[child.attributes[BindGroup.bindAttrName]] === child.attributes.value }
+  }
+
+  return { value: state[child.attributes[BindGroup.bindAttrName]] }
+}
+
 BindGroup.mapChildren = (child, cbk, state, setState) => {
   if (child.attributes instanceof Object && child.attributes[BindGroup.bindAttrName]) {
     child.attributes = {
       ...child.attributes,
       [child.attributes[BindGroup.bindAttrEvent] || 'onChange']: evt => cbk.apply(null, [...BindGroup.createChangeReport(child, evt, setState), evt]),
-      name: child.attributes[BindGroup.bindAttrName], value: state[child.attributes[BindGroup.bindAttrName]]
+      name: child.attributes[BindGroup.bindAttrName],
+      ...BindGroup.getFormProps(child, state)
     }
   } else if (child.children instanceof Array && child.children.length) {
     child.children = child.children.map(child => BindGroup.mapChildren(child, cbk, state, setState));

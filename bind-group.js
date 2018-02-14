@@ -35,6 +35,13 @@ var BindGroup = function (_Component) {
       }
     }
   }, {
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      if (this.props[BindGroup.preloadStateAttrName]) {
+        this.setState(this.props[BindGroup.preloadStateAttrName]);
+      }
+    }
+  }, {
     key: "transformChildren",
     value: function transformChildren(children) {
       var _this2 = this;
@@ -58,29 +65,47 @@ var BindGroup = function (_Component) {
 BindGroup.bindAttrName = "data-bind";
 BindGroup.bindAttrEvent = "data-event";
 BindGroup.watchHandlerAttrName = "watch";
+BindGroup.preloadStateAttrName = "preload";
+
+BindGroup.extractValue = function (target) {
+  if (target.nodeName === "INPUT" && target.getAttribute("type") === "checkbox") {
+    return target.checked;
+  } else {
+    return target.value;
+  }
+};
 
 BindGroup.createChangeReport = function (child, _ref2, setState) {
   var target = _ref2.target;
 
-  // checkbox
-  var change = { name: child.attributes[BindGroup.bindAttrName], value: target.value };
-  if (target.nodeName === "INPUT" && target.getAttribute("type") === "checkbox") {
-    change.value = target.checked;
-  }
+
+  var change = _defineProperty({}, child.attributes[BindGroup.bindAttrName], BindGroup.extractValue(target));
 
   setState(function (state) {
-    return _extends({}, state, _defineProperty({}, change.name, change.value));
+    return _extends({}, state, change);
   });
   return [_defineProperty({}, change.name, change.value), change.name];
 };
 
+BindGroup.getFormProps = function (child, state) {
+  if (child.attributes.type === "checkbox") {
+    return { checked: state[child.attributes[BindGroup.bindAttrName]] };
+  }
+
+  if (child.attributes.type === "radio") {
+    return { checked: state[child.attributes[BindGroup.bindAttrName]] === child.attributes.value };
+  }
+
+  return { value: state[child.attributes[BindGroup.bindAttrName]] };
+};
+
 BindGroup.mapChildren = function (child, cbk, state, setState) {
   if (child.attributes instanceof Object && child.attributes[BindGroup.bindAttrName]) {
-    var _extends3;
+    var _extends2;
 
-    child.attributes = _extends({}, child.attributes, (_extends3 = {}, _defineProperty(_extends3, child.attributes[BindGroup.bindAttrEvent] || 'onChange', function (evt) {
+    child.attributes = _extends({}, child.attributes, (_extends2 = {}, _defineProperty(_extends2, child.attributes[BindGroup.bindAttrEvent] || 'onChange', function (evt) {
       return cbk.apply(null, [].concat(_toConsumableArray(BindGroup.createChangeReport(child, evt, setState)), [evt]));
-    }), _defineProperty(_extends3, "name", child.attributes[BindGroup.bindAttrName]), _defineProperty(_extends3, "value", state[child.attributes[BindGroup.bindAttrName]]), _extends3));
+    }), _defineProperty(_extends2, "name", child.attributes[BindGroup.bindAttrName]), _extends2), BindGroup.getFormProps(child, state));
   } else if (child.children instanceof Array && child.children.length) {
     child.children = child.children.map(function (child) {
       return BindGroup.mapChildren(child, cbk, state, setState);
