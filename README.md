@@ -18,7 +18,7 @@ preact-bind-group exposes a `<BindGroup>` component that looks for children that
 Install it:
 
 ```bash
-npm install --save-dev preact-bind-group
+npm install preact-bind-group
 ```
 
 Import it it in your components and use it:
