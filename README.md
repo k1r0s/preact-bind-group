@@ -32,10 +32,10 @@ const App = () => (
     <h3>BindGroup demo</h3>
     <BindGroup watch={(...args) => console.log(args)}>
       <div>
-        <input data-bind="value0" />
+        <input data-bind="name" />
       </div>
       <div>
-        <input data-bind="value1" />
+        <input data-bind="age" />
       </div>
     </BindGroup>
   </div>
@@ -47,7 +47,7 @@ const App = () => (
 The `watch` callback receives an `{key: value}` object containing the changed property as its parameter.
 
 ```
- {value0: "asdas"}
+ {name: "asdas"}
 ```
 
 Then you can update your state easily:
@@ -56,13 +56,19 @@ Then you can update your state easily:
   <BindGroup watch={change => this.setState({ ...change })}>
 ```
 
+If the input element is of type _checkbox_ or _radio_, then it'll receive the checked html property as its value.
+
+For convenience, you'll get a second argument with the field key. The callback signature is _({ [key: string]: any }, key: string) => void_.
+
 ### Custom events
 
 You can change the event that `BindGroup` should listen to:
 
 ```javascript
-<input data-bind="value0" data-event="onInput"/>
+  <input data-bind="name" data-event="onInput"/>
 ```
+
+> Note: keep in mind that `onInput` in Preact === `onChange` in React, and `onChange` in Preact === `onBlur` on React.
 
 #### Preload form with data
 
