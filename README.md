@@ -1,71 +1,77 @@
-## Preact bind-group
+## preact-bind-group
 
-#### What
+An event wrapper for preact (soon react) to centralize and simplify events management and state binding.
 
-`<BindGroup />` its a event wrapper for preact (soon react) to centralize and simplify events management and state binding.
+Check [the demo](https://codesandbox.io/s/wmpv1o4z8).
 
-#### Why
+### Why
 
 React/Preact forms are a bit cryptic because it leads developer to deal with too many language primitives to tie state with fields, care about events and duplicate this pattern for each field.
 
-#### How
+### How
 
-If you check the code u will see that is seeking into its children that contain `data-bind` attribute. Those children are intended to be "fields" with some change that you may track and some property that should be tied to the state value.
+preact-bind-group exposes a `<BindGroup>` component that looks for children that contain `data-bind` attribute which should be assigned to any element or component that emits an `onChange` event.
 
-BindGroup keeps an internal state to internally track these values.
 
-BindGroup supports any control field that uses `onChange` to deal with changes and it does by default, but additionally you can provide other event reporter with `data-event` as follows:
+### Get started
 
-```javascript
-<input data-bind="value0" data-event="onInput"/>
+Install it:
+
+```bash
+npm install preact-bind-group
 ```
 
-#### Usage
+Import it it in your components and use it:
 
+```jsx
+import { render } from "preact";
+import { BindGroup } from "preact-bind-group";
 
-```javascript
-<div>
-  <h3>BindGroup demo</h3>
-  <BindGroup watch={change => console.log(change)}>
-    <div>
-      <input data-bind="value0"/>
-    </div>
-    <div>
-      <input data-bind="value1"/>
-    </div>
-    <div>
-      <input data-bind="value2"/>
-    </div>
-    <div>
-      <input data-bind="value3"/>
-    </div>
-  </BindGroup>
-</div>
+const App = () => (
+  <div>
+    <h3>BindGroup demo</h3>
+    <BindGroup watch={change => console.log(change)}>
+      <label>
+        Name: <input data-bind="name" />
+      </label>
+      <br />
+      <label>
+        Age: <input data-bind="age" />
+      </label>
+    </BindGroup>
+  </div>
+);
 ```
-If you change any input value you should see this on the console:
+
+### Watch callback
+
+The `watch` callback receives an `{key: value}` object containing the changed property as its parameter.
 
 ```
- {value0: "asdas"}
- {value2: "asdasdas"}
- {value1: "asdasdasdas"}
- {value3: "asdasdas"}
+ {name: "asdas"}
 ```
 
 Then you can update your state easily:
 
-```
-render() {
-  ...
+```jsx
   <BindGroup watch={change => this.setState({ ...change })}>
-  ...
-}
 ```
 
-This is the signature of the `watch` callback: ({ [key: string]: any }, key: string) => void
+If the input element is of type _checkbox_ or _radio_, then it'll receive the checked html property as its value.
 
-If you need to perform any other actions, like validation or something, you can use 2nd argument instead.
+For convenience, you'll get a second argument with the field key. The callback signature is _({ [key: string]: any }, key: string) => void_.
 
-#### preload form with data
+### Custom events
+
+You can change the event that `BindGroup` should listen to:
+
+```javascript
+  <input data-bind="name" data-event="onInput"/>
+```
+
+> Note: keep in mind that `onInput` in Preact === `onChange` in React, and `onChange` in Preact === `onBlur` on React.
+
+#### Preload form with data
 
 You should use `preload` attr to fill form fields with default data
 
