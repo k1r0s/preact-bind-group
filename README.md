@@ -30,13 +30,14 @@ import { BindGroup } from "preact-bind-group";
 const App = () => (
   <div>
     <h3>BindGroup demo</h3>
-    <BindGroup watch={(...args) => console.log(args)}>
-      <div>
-        <input data-bind="name" />
-      </div>
-      <div>
-        <input data-bind="age" />
-      </div>
+    <BindGroup watch={change => console.log(change)}>
+      <label>
+        Name: <input data-bind="name" />
+      </label>
+      <br />
+      <label>
+        Age: <input data-bind="age" />
+      </label>
     </BindGroup>
   </div>
 );
