@@ -6,6 +6,7 @@
     "build": "rollup -c rollup.config.js"
   },
   "main": "bind-group.js",
+  "module": "bind-group.es.js",
   "keywords": [
     "preact",
     "forms",
@@ -19,10 +20,11 @@
     "babel-plugin-transform-es2015-computed-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "preact": "^8.2.6",
     "rollup": "^0.50.0",
     "rollup-plugin-babel": "^3.0.2"
   },
-  "dependencies": {
-    "preact": "^8.2.6"
+  "peerDependencies": {
+    "preact": "*"
   }
 }
