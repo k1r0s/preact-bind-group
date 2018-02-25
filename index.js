@@ -1,7 +1,6 @@
 import { h, Component } from "preact";
 
 export class BindGroup extends Component {
-
   onPropertyChange(change, evt) {
     if (this.props instanceof Object && typeof this.props[BindGroup.watchHandlerAttrName] === "function") {
       this.props[BindGroup.watchHandlerAttrName].call(null, change, evt);
@@ -18,9 +17,10 @@ export class BindGroup extends Component {
     return children.map(child => BindGroup.mapChildren(child, this.onPropertyChange.bind(this), this.state, this.setState.bind(this)));
   }
 
-  render({ children }) {
+  render(props) {
+    const { children, watch, preload,  ...rest} = props;
     return (
-      h("div", null, [
+      h("div", rest, [
         this.transformChildren(children)
       ])
     )
@@ -39,7 +39,7 @@ BindGroup.extractValue = target => {
   } else {
     return target.value;
   }
-}
+};
 
 BindGroup.createChangeReport = (child, { target }, setState) => {
 
@@ -49,7 +49,7 @@ BindGroup.createChangeReport = (child, { target }, setState) => {
 
   setState(state => ({ ...state, ...change }));
   return [change, child.attributes[BindGroup.bindAttrName]];
-}
+};
 
 BindGroup.getFormProps = (child, state) => {
   if (child.attributes.type === "checkbox") {
@@ -61,7 +61,7 @@ BindGroup.getFormProps = (child, state) => {
   }
 
   return { value: state[child.attributes[BindGroup.bindAttrName]] }
-}
+};
 
 BindGroup.mapChildren = (child, cbk, state, setState) => {
   if (child.attributes instanceof Object && child.attributes[BindGroup.bindAttrName]) {
@@ -75,4 +75,4 @@ BindGroup.mapChildren = (child, cbk, state, setState) => {
     child.children = child.children.map(child => BindGroup.mapChildren(child, cbk, state, setState));
   }
   return child;
-}
+};
