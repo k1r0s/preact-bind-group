@@ -1,0 +1,16 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "modules": false,
+        "loose": true
+      }
+    ]
+  ],
+  "plugins": [
+    "transform-class-properties",
+    "transform-es2015-computed-properties",
+    "transform-object-rest-spread"
+  ]
+}
