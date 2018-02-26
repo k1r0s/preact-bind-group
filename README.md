@@ -1,5 +1,11 @@
 ## preact-bind-group
 
+[![downloads](https://img.shields.io/npm/dm/preact-bind-group.svg)](https://www.npmjs.com/package/preact-bind-group)
+[![version](https://img.shields.io/npm/v/preact-bind-group.svg)](https://www.npmjs.com/package/preact-bind-group/)
+[![dependencies](https://david-dm.org/k1r0s/preact-bind-group/status.svg)](https://david-dm.org/k1r0s/preact-bind-group/status.svg)
+[![dev-dependencies](https://david-dm.org/k1r0s/preact-bind-group/dev-status.svg)](https://www.npmjs.com/package/preact-bind-group)
+
+
 An event wrapper for preact (soon react) to centralize and simplify events management and state binding.
 
 Check [the demo](https://codesandbox.io/s/wmpv1o4z8).
