@@ -18,6 +18,12 @@ export class BindGroup extends Component {
     }
   }
 
+  componentWillMount() {
+    if(this.props[BindGroup.preloadStateAttrName]) {
+      this.setState(this.props[BindGroup.preloadStateAttrName]);
+    }
+  }
+
   transformChildren(children) {
     return children.map(child => BindGroup.mapChildren(child, this.onPropertyChange.bind(this), this.state, this.setState.bind(this)));
   }

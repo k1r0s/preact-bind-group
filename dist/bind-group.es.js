@@ -33,6 +33,12 @@ var BindGroup = function (_Component) {
     }
   };
 
+  BindGroup.prototype.componentWillMount = function componentWillMount() {
+    if (this.props[BindGroup.preloadStateAttrName]) {
+      this.setState(this.props[BindGroup.preloadStateAttrName]);
+    }
+  };
+
   BindGroup.prototype.transformChildren = function transformChildren(children) {
     var _this2 = this;
 
