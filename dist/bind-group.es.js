@@ -27,9 +27,9 @@ var BindGroup = function (_Component) {
     }
   };
 
-  BindGroup.prototype.componentWillMount = function componentWillMount() {
-    if (this.props[BindGroup.preloadStateAttrName]) {
-      this.setState(this.props[BindGroup.preloadStateAttrName]);
+  BindGroup.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+    if (nextProps[BindGroup.preloadStateAttrName]) {
+      this.setState(nextProps[BindGroup.preloadStateAttrName]);
     }
   };
 
@@ -70,15 +70,18 @@ var BindGroup = function (_Component) {
   };
 
   BindGroup.getFormProps = function getFormProps(child, state) {
+    var drivenValue = typeof child.attributes.value === "string";
+    var drivenChecked = typeof child.attributes.checked === "string";
+
     if (child.attributes.type === "checkbox") {
-      return { checked: state[child.attributes[BindGroup.bindAttrName]] };
+      return { checked: drivenChecked ? child.attributes.checked : state[child.attributes[BindGroup.bindAttrName]] };
     }
 
     if (child.attributes.type === "radio") {
-      return { checked: state[child.attributes[BindGroup.bindAttrName]] === child.attributes.value };
+      return { checked: drivenChecked ? child.attributes.checked : state[child.attributes[BindGroup.bindAttrName]] === child.attributes.value };
     }
 
-    return { value: state[child.attributes[BindGroup.bindAttrName]] };
+    return { value: drivenValue ? child.attributes.value : state[child.attributes[BindGroup.bindAttrName]] };
   };
 
   BindGroup.mapChildren = function mapChildren(child, cbk, state, setState) {
