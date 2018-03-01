@@ -12,9 +12,9 @@ export class BindGroup extends Component {
     }
   }
 
-  componentWillMount() {
-    if(this.props[BindGroup.preloadStateAttrName]) {
-      this.setState(this.props[BindGroup.preloadStateAttrName]);
+  componentWillReceiveProps(nextProps) {
+    if(nextProps[BindGroup.preloadStateAttrName]) {
+      this.setState(nextProps[BindGroup.preloadStateAttrName]);
     }
   }
 
@@ -49,15 +49,18 @@ export class BindGroup extends Component {
   }
 
   static getFormProps(child, state) {
+    const drivenValue = typeof child.attributes.value === "string";
+    const drivenChecked = typeof child.attributes.checked === "string";
+
     if (child.attributes.type === "checkbox") {
-      return { checked: state[child.attributes[BindGroup.bindAttrName]] }
+      return { checked: drivenChecked ? child.attributes.checked : state[child.attributes[BindGroup.bindAttrName]] };
     }
 
     if (child.attributes.type === "radio") {
-      return { checked: state[child.attributes[BindGroup.bindAttrName]] === child.attributes.value }
+      return { checked: drivenChecked ? child.attributes.checked : state[child.attributes[BindGroup.bindAttrName]] === child.attributes.value };
     }
 
-    return { value: state[child.attributes[BindGroup.bindAttrName]] }
+    return { value: drivenValue ? child.attributes.value : state[child.attributes[BindGroup.bindAttrName]] };
   }
 
   static mapChildren (child, cbk, state, setState) {
