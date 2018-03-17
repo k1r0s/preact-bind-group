@@ -25,6 +25,12 @@ export class FormGroup extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps[FormGroup.preloadStateAttrName]) {
+      this.setState(nextProps[FormGroup.preloadStateAttrName]);
+    }
+  }
+
   transformChildren(children) {
     return children.map(child =>
       FormGroup.mapChildren(

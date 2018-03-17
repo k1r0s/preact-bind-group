@@ -39,6 +39,12 @@ var FormGroup = function (_React$Component) {
     }
   };
 
+  FormGroup.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+    if (nextProps[FormGroup.preloadStateAttrName]) {
+      this.setState(nextProps[FormGroup.preloadStateAttrName]);
+    }
+  };
+
   FormGroup.prototype.transformChildren = function transformChildren(children) {
     var _this2 = this;
 
