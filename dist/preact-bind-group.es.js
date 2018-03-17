@@ -1,8 +1,4 @@
-(function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('preact')) :
-	typeof define === 'function' && define.amd ? define(['exports', 'preact'], factory) :
-	(factory((global.bindGroup = {}),global.preact));
-}(this, (function (exports,preact) { 'use strict';
+import { h, Component } from 'preact';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -57,7 +53,7 @@ var BindGroup = function (_Component) {
         preload = props.preload,
         rest = _objectWithoutProperties(props, ["children", "watch", "preload"]);
 
-    return preact.h("div", rest, [this.transformChildren(children)]);
+    return h("div", rest, [this.transformChildren(children)]);
   };
 
   BindGroup.extractValue = function extractValue(target) {
@@ -110,14 +106,10 @@ var BindGroup = function (_Component) {
   };
 
   return BindGroup;
-}(preact.Component);
+}(Component);
 BindGroup.bindAttrName = "data-bind";
 BindGroup.bindAttrEvent = "data-event";
 BindGroup.watchHandlerAttrName = "watch";
 BindGroup.preloadStateAttrName = "preload";
 
-exports.BindGroup = BindGroup;
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-})));
+export { BindGroup };

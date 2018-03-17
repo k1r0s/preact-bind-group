@@ -6,9 +6,14 @@
 [![dev-dependencies](https://david-dm.org/k1r0s/preact-bind-group/dev-status.svg)](https://www.npmjs.com/package/preact-bind-group)
 
 
-An event wrapper for preact (soon react) to centralize and simplify events management and state binding.
+An event wrapper for preact and react to centralize and simplify events management and state binding.
 
-Check [the demo](https://codesandbox.io/s/wmpv1o4z8).
+Check (outdated) [the demo](https://codesandbox.io/s/wmpv1o4z8).
+
+breaking changes since version 2.*
+
+- React is now supported. Just import from "preact-bind-group/react"
+- <BindGroup/> component has been renamed to <FormGroup />"
 
 ### Why
 
@@ -16,7 +21,7 @@ React/Preact forms are a bit cryptic because it leads developer to deal with too
 
 ### How
 
-preact-bind-group exposes a `<BindGroup>` component that looks for children that contain `data-bind` attribute which should be assigned to any element or component that emits an `onChange` event.
+preact-bind-group exposes a `<FormGroup>` component that looks for children that contain `data-bind` attribute which should be assigned to any element or component that emits an `onChange` event.
 
 
 ### Get started
@@ -31,12 +36,12 @@ Import it it in your components and use it:
 
 ```jsx
 import { render } from "preact";
-import { BindGroup } from "preact-bind-group";
+import { FormGroup } from "preact-bind-group";
 
 const App = () => (
   <div>
-    <h3>BindGroup demo</h3>
-    <BindGroup watch={change => console.log(change)}>
+    <h3>FormGroup demo</h3>
+    <FormGroup watch={change => console.log(change)}>
       <label>
         Name: <input data-bind="name" />
       </label>
@@ -44,7 +49,7 @@ const App = () => (
       <label>
         Age: <input data-bind="age" />
       </label>
-    </BindGroup>
+    </FormGroup>
   </div>
 );
 ```
@@ -60,7 +65,7 @@ The `watch` callback receives an `{key: value}` object containing the changed pr
 Then you can update your state easily:
 
 ```jsx
-  <BindGroup watch={change => this.setState({ ...change })}>
+  <FormGroup watch={change => this.setState({ ...change })}>
 ```
 
 If the input element is of type _checkbox_ or _radio_, then it'll receive the checked html property as its value.
@@ -69,7 +74,7 @@ For convenience, you'll get a second argument with the field key. The callback s
 
 ### Custom events
 
-You can change the event that `BindGroup` should listen to:
+You can change the event that `FormGroup` should listen to:
 
 ```javascript
   <input data-bind="name" data-event="onInput"/>
@@ -83,8 +88,8 @@ You should use `preload` attr to fill form fields with default data
 
 ```javascript
 <div>
-  <h3>BindGroup demo</h3>
-  <BindGroup watch={change => console.log(change)} preload={userModel}>
+  <h3>FormGroup demo</h3>
+  <FormGroup watch={change => console.log(change)} preload={userModel}>
     <div>
       <input data-bind="name"/>
     </div>
@@ -99,6 +104,6 @@ You should use `preload` attr to fill form fields with default data
     <div>
       <textarea data-bind="comments"/>
     </div>
-  </BindGroup>
+  </FormGroup>
 </div>
 ```
