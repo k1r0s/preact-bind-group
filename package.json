@@ -1,6 +1,6 @@
 {
   "name": "preact-bind-group",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "simple preact grouping onChange events",
   "scripts": {
     "build": "npm run build:react ; npm run build:preact",
