@@ -13,7 +13,7 @@ Check (outdated) [the demo](https://codesandbox.io/s/wmpv1o4z8).
 breaking changes since version 2.*
 
 - React is now supported. Just import from "preact-bind-group/react"
-- <BindGroup/> component has been renamed to <FormGroup />"
+- `BindGroup` component has been renamed to `FormGroup`
 
 ### Why
 
