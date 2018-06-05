@@ -87,6 +87,7 @@ export class FormGroup extends React.Component {
   }
 
   static mapChildren(child, cbk, state, setState) {
+    if (!child) return null;
     const { children, ...props } = child.props;
     //    let newProps = { ...props, key: `fg${FormGroup.getReactKey()}` };
     let newProps = { ...props };

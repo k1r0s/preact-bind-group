@@ -107,6 +107,8 @@ var FormGroup = function (_React$Component) {
   };
 
   FormGroup.mapChildren = function mapChildren(child, cbk, state, setState) {
+    if (!child) return null;
+
     var _child$props = child.props,
         children = _child$props.children,
         props = _objectWithoutProperties(_child$props, ["children"]);
