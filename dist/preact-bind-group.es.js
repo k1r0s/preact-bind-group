@@ -91,6 +91,7 @@ var FormGroup = function (_Component) {
   };
 
   FormGroup.mapChildren = function mapChildren(child, cbk, state, setState) {
+    if (!child) return null;
     if (child.attributes instanceof Object && child.attributes[FormGroup.bindAttrName]) {
       var _extends2;
 

@@ -70,6 +70,7 @@ export class FormGroup extends Component {
   }
 
   static mapChildren (child, cbk, state, setState) {
+    if (!child) return null;
     if (child.attributes instanceof Object && child.attributes[FormGroup.bindAttrName]) {
       child.attributes = {
         ...child.attributes,
