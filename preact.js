@@ -1,4 +1,8 @@
-import { h, Component } from 'preact';
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('preact')) :
+	typeof define === 'function' && define.amd ? define(['exports', 'preact'], factory) :
+	(factory((global.preactFormGroup = {}),global.preact));
+}(this, (function (exports,preact) { 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -53,7 +57,7 @@ var FormGroup = function (_Component) {
         preload = props.preload,
         rest = _objectWithoutProperties(props, ["children", "watch", "preload"]);
 
-    return h("div", rest, [this.transformChildren(children)]);
+    return preact.h("div", rest, [this.transformChildren(children)]);
   };
 
   FormGroup.extractValue = function extractValue(target) {
@@ -107,10 +111,14 @@ var FormGroup = function (_Component) {
   };
 
   return FormGroup;
-}(Component);
+}(preact.Component);
 FormGroup.bindAttrName = "data-bind";
 FormGroup.bindAttrEvent = "data-event";
 FormGroup.watchHandlerAttrName = "watch";
 FormGroup.preloadStateAttrName = "preload";
 
-export { FormGroup };
+exports.FormGroup = FormGroup;
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+})));
