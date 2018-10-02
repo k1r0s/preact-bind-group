@@ -8,7 +8,7 @@
 
 An event wrapper for preact and react to centralize and simplify events management and state binding.
 
-Check (outdated) [the demo](https://codesandbox.io/s/wmpv1o4z8).
+[![Edit preact-bind-group example](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/6v861168y3)
 
 breaking changes since version 2.*
 
